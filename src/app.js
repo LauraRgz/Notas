@@ -47,11 +47,11 @@ yargs.command({
   handler: add,
 });
 
-yargs.command({
+/*yargs.command({
   command: 'list',
   describe: 'list notes',
   handler: list,
-});
+});*/
 
 // Create list command
 yargs.command({
@@ -59,9 +59,8 @@ yargs.command({
   describe: 'list existing notes',
   handler: function(argv) {
   console.log(chalk.blue(`Listing notes`));
-  },
+     },
 });
-  
 
 const path = './notas.txt';
 fs.access(path, fs.F_OK, (err) => {
@@ -99,6 +98,14 @@ fs.access(path, fs.F_OK, (err) => {
 //   },
 // });
 
+// Create list command
+yargs.command({
+command: 'list',
+describe: 'list existing notes',
+handler: function(argv) {
+console.log(chalk.blue(`Listing notes`));
+   },
+ });
 
 // yargs.command({
 //   command: 'read',
