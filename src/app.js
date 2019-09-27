@@ -24,7 +24,17 @@ const add = function(argv){
 }
 
 const remove = function(argv){
-  nota.splice(notes.indexOf(argv.title));
+  obj.notes.forEach((note, i) => {
+    obj.notes.splice(obj.notes.indexOf(nota.title),1);
+  })
+}
+
+const read = function(argv){
+  obj.notes.forEach((note, i) => {
+    if (note.title == argv.title)
+      console.log(`Title: ${note.title} \n Body: ${note.body} \n Author: ${note.author}`);
+    
+  })
 }
 
 // Create add command
@@ -55,18 +65,35 @@ yargs.command({
 yargs.command({
   command: 'list',
   describe: 'list existing notes',
-  handler: list /*{
-  console.log(chalk.blue(`Listing notes`));
-     },*/
+  handler: list,
 });
 
 // Create remove command
 yargs.command({
   command: 'remove',
   describe: 'remove a note',
-  handler: function(argv) {
-  console.log('Removing a note');
+  builder: {
+    title: {
+      describe: 'Title of the note',
+      demandOption: true,
+      type: 'string',
+    },
   },
+  handler: remove,
+});
+
+//Create read command
+yargs.command({
+  command: 'read',
+  describe: 'read a note',
+  builder: {
+    title: {
+      describe: 'Title of the note',
+      demandOption: true,
+      type: 'string',
+    },
+  },  
+  handler: read,
 });
 
 const path = './notas.txt';
@@ -96,17 +123,6 @@ fs.access(path, fs.F_OK, (err) => {
 // yargs.parse();
 
 // npm i --save yargs
-
-
-
-
-// yargs.command({
-//   command: 'read',
-//   describe: 'read a note',
-//   handler: function() {
-//     console.log('Reading notes');
-//   },
-// });
 
 // yargs.parse();
 
