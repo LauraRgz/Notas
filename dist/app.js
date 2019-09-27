@@ -1,27 +1,38 @@
-import yargs from 'yargs';
-import fs from 'fs';
-import uuid from 'uuid';
-let obj;
+"use strict";
 
-const list = function () {
-  obj.notes.forEach((note, i) => {
-    console.log(`${i}: ${note.title}`);
+var _yargs = _interopRequireDefault(require("yargs"));
+
+var _fs = _interopRequireDefault(require("fs"));
+
+var _uuid = _interopRequireDefault(require("uuid"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var obj;
+
+var list = function list() {
+  obj.notes.forEach(function (note, i) {
+    console.log("".concat(i, ": ").concat(note.title));
   });
 };
 
-const add = function (argv) {
-  const nota = {
-    uuid: uuid.v4(),
+var add = function add(argv) {
+  var nota = {
+    uuid: _uuid["default"].v4(),
     title: argv.title,
     body: argv.body,
     author: argv.author
   };
   obj.notes.push(nota);
-  console.log(`Added: ${nota.title}`);
+  console.log("Added: ".concat(nota.title));
+};
+
+var remove = function remove(argv) {
+  nota.splice(notes.indexOf(argv.title));
 }; // Create add command
 
 
-yargs.command({
+_yargs["default"].command({
   command: 'add',
   describe: 'add a new note',
   builder: {
@@ -42,28 +53,36 @@ yargs.command({
     }
   },
   handler: add
-});
-/*yargs.command({
-  command: 'list',
-  describe: 'list notes',
-  handler: list,
-});*/
-// Create list command
+}); // Create list command
 
-yargs.command({
+
+_yargs["default"].command({
   command: 'list',
   describe: 'list existing notes',
-  handler: function (argv) {
-    console.log(chalk.blue(`Listing notes`));
+  handler: list
+  /*{
+  console.log(chalk.blue(`Listing notes`));
+  },*/
+
+}); // Create remove command
+
+
+_yargs["default"].command({
+  command: 'remove',
+  describe: 'remove a note',
+  handler: function handler(argv) {
+    console.log('Removing a note');
   }
 });
-const path = './notas.txt';
-fs.access(path, fs.F_OK, err => {
+
+var path = './notas.txt';
+
+_fs["default"].access(path, _fs["default"].F_OK, function (err) {
   if (err) {
-    fs.writeFileSync("notas.txt", "");
+    _fs["default"].writeFileSync("notas.txt", "");
   }
 
-  const data = fs.readFileSync("notas.txt").toString();
+  var data = _fs["default"].readFileSync("notas.txt").toString();
 
   if (data !== "") {
     obj = JSON.parse(data);
@@ -73,26 +92,12 @@ fs.access(path, fs.F_OK, err => {
     };
   }
 
-  yargs.parse();
-  fs.writeFileSync("notas.txt", JSON.stringify(obj));
+  _yargs["default"].parse();
+
+  _fs["default"].writeFileSync("notas.txt", JSON.stringify(obj));
 }); // yargs.parse();
 // npm i --save yargs
 // yargs.command({
-//   command: 'remove',
-//   describe: 'remove a note',
-//   handler: function() {
-//     console.log('Removing a note');
-//   },
-// });
-// Create list command
-
-yargs.command({
-  command: 'list',
-  describe: 'list existing notes',
-  handler: function (argv) {
-    console.log(chalk.blue(`Listing notes`));
-  }
-}); // yargs.command({
 //   command: 'read',
 //   describe: 'read a note',
 //   handler: function() {

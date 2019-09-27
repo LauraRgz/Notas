@@ -1,5 +1,12 @@
-const getNotes = function _getNotes() {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getNotes = void 0;
+
+var getNotes = function _getNotes() {
   return 'your notes';
 };
 
-export { getNotes };
+exports.getNotes = getNotes;

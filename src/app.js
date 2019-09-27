@@ -23,6 +23,10 @@ const add = function(argv){
   console.log(`Added: ${nota.title}`);
 }
 
+const remove = function(argv){
+  nota.splice(notes.indexOf(argv.title));
+}
+
 // Create add command
 yargs.command({
   command: 'add',
@@ -47,19 +51,22 @@ yargs.command({
   handler: add,
 });
 
-/*yargs.command({
-  command: 'list',
-  describe: 'list notes',
-  handler: list,
-});*/
-
 // Create list command
 yargs.command({
   command: 'list',
   describe: 'list existing notes',
-  handler: function(argv) {
+  handler: list /*{
   console.log(chalk.blue(`Listing notes`));
-     },
+     },*/
+});
+
+// Create remove command
+yargs.command({
+  command: 'remove',
+  describe: 'remove a note',
+  handler: function(argv) {
+  console.log('Removing a note');
+  },
 });
 
 const path = './notas.txt';
@@ -90,22 +97,8 @@ fs.access(path, fs.F_OK, (err) => {
 
 // npm i --save yargs
 
-// yargs.command({
-//   command: 'remove',
-//   describe: 'remove a note',
-//   handler: function() {
-//     console.log('Removing a note');
-//   },
-// });
 
-// Create list command
-yargs.command({
-command: 'list',
-describe: 'list existing notes',
-handler: function(argv) {
-console.log(chalk.blue(`Listing notes`));
-   },
- });
+
 
 // yargs.command({
 //   command: 'read',
