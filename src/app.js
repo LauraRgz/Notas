@@ -32,8 +32,7 @@ const remove = function(argv){
 const read = function(argv){
   obj.notes.forEach((note, i) => {
     if (note.title == argv.title)
-      console.log(`Title: ${note.title} \n Body: ${note.body} \n Author: ${note.author}`);
-    
+      console.log("Title: " + note.title + "\n" + "ID:  " + note.uuid + "\n" + "Body: " + note.body + "\n" + "Author: " + note.author);
   })
 }
 

@@ -35,7 +35,7 @@ var remove = function remove(argv) {
 
 var read = function read(argv) {
   obj.notes.forEach(function (note, i) {
-    if (note.title == argv.title) console.log("Title: ".concat(note.title, " \n Body: ").concat(note.body, " \n author: ").concat(note.author));
+    if (note.title == argv.title) console.log("Title: " + note.title + "\n" + "ID:  " + note.uuid + "\n" + "Body: " + note.body + "\n" + "Author: " + note.author); //`Title: ${note.title} \n Body: ${note.body} \n Author: ${note.author}`
   });
 }; // Create add command
 
